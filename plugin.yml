@@ -1,0 +1,9 @@
+name: NinjaJump
+main: com.github.Cowmaster.NinjaJump.NinjaJump
+version: 1.5
+commands:
+   nj:
+      description: Toggle Ninja Skills
+      usage: |
+          /nj true
+          /nj false
