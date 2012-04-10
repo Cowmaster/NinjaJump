@@ -13,10 +13,9 @@ public class NinjaJump extends JavaPlugin
 {	
 	public HashMap<UUID, Boolean> fall = new HashMap<UUID, Boolean>();
 	public HashMap<UUID, Double> bounceHight = new HashMap<UUID, Double>();
-	
+
 	public boolean enabled = true;
-	public double maxBounce = 3.0;
-	public int handItem = 0;
+	public int jumpItem = 280;
 	public double jumpHeight = 1.5;
 	public double jumpSpeed = 1.2;
 	
@@ -25,17 +24,15 @@ public class NinjaJump extends JavaPlugin
 
 		FileConfiguration config = getConfig();
 		
-		maxBounce = config.getDouble("NinjaJump.max", maxBounce);
-		config.set("NinjaJump.max", maxBounce);
-		handItem = config.getInt("NinjaJump.item", 0);
-		config.set("NinjaJump.item", 0);
-		jumpHeight = config.getDouble("NinjaJump.height", jumpHeight);
-		config.set("NinjaJump.height", jumpHeight);
-		jumpSpeed = config.getDouble("NinjaJump.speed", jumpSpeed);
-		config.set("NinjaJump.speed", jumpSpeed);
+		jumpItem = config.getInt("NinjaJump.jumpitem", jumpItem);
+		config.set("NinjaJump.jumpitem", jumpItem);
+		jumpHeight = config.getDouble("NinjaJump.jumpheight", jumpHeight);
+		config.set("NinjaJump.jumpheight", jumpHeight);
+		jumpSpeed = config.getDouble("NinjaJump.jumpspeed", jumpSpeed);
+		config.set("NinjaJump.jumpspeed", jumpSpeed);
 		
 		saveConfig();
-		
+
 		new NinjaJumpPlayerListener(this);
 		new NinjaJumpEntityListener(this);
 	}
@@ -43,24 +40,27 @@ public class NinjaJump extends JavaPlugin
 	{
 		if(commandLabel.equalsIgnoreCase("nj") && sender instanceof Player) 
 		{
-			if(hasPermission((Player) sender, "NinjaJump.set"))
-			{
-				try
+			//if(hasPermission((Player) sender, "NinjaJump.set"))
+			//{
+			try
 				{
 					enabled = Boolean.parseBoolean(args[0]);
 					sender.sendMessage(enabled ? "Ninja Skills Enabled":"Ninja Skills Disabled");
 					return true;
 				}
 				catch (Exception e){}
-			}
+			//}
 		}
 		return false;
 	}
 	
 	public void onDisable() { }
 	
-	private boolean hasPermission(Player player, String permission)
+	/*
+	 private boolean hasPermission(Player player, String permission)
+
 	{
 		return player.isOp() || player.hasPermission(permission);
 	}
+		 */
 }
